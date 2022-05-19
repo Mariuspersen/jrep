@@ -1,10 +1,8 @@
 #!/usr/bin/env node
 const args = process.argv.splice(2);
 const current_dir = process.cwd();
-const pattern_regex = /(?<=\')[\w.]+(?=\')/
 const match_color = "\u001b[31m";
 const reseet_color = "\u001b[0m";
-
 process.stdin.on('data', data => {
     let formatted_string = data.toString();
     args.forEach(arg => {
