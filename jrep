@@ -1,0 +1,19 @@
+#!/usr/bin/env node
+const args = process.argv.splice(2);
+const current_dir = process.cwd();
+const pattern_regex = /(?<=\')[\w.]+(?=\')/
+const match_color = "\u001b[31m";
+const reseet_color = "\u001b[0m";
+
+process.stdin.on('data', data => {
+    let formatted_string = data.toString();
+    args.forEach(arg => {
+        const regex = new RegExp(`.*${arg}.*`,"gm");
+        const matches = formatted_string.match(regex);
+        matches?.forEach(match => {
+            const split_string = match.split(arg);
+            const consolidated = split_string.reduce((prev,curr) => prev += match_color + arg + reseet_color + curr);
+            process.stdout.write(consolidated + "\n");
+        });
+    })
+})
